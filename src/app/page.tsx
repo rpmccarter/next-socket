@@ -1,6 +1,15 @@
+'use client';
 import Image from "next/image";
+import { useEffect } from "react";
+import io from 'socket.io-client';
 
 export default function Home() {
+  useEffect(() => {
+    const socket = io({ path: '/api/socket.io', addTrailingSlash: false });
+    return () => {
+      socket.disconnect();
+    };
+  })
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
